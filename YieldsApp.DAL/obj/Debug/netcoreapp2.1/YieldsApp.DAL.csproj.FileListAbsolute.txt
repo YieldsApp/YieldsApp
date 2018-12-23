@@ -1,0 +1,8 @@
+D:\Projects\YieldsApp\YieldsApp\YieldsApp.DAL\bin\Debug\netcoreapp2.1\YieldsApp.DAL.deps.json
+D:\Projects\YieldsApp\YieldsApp\YieldsApp.DAL\bin\Debug\netcoreapp2.1\YieldsApp.DAL.dll
+D:\Projects\YieldsApp\YieldsApp\YieldsApp.DAL\bin\Debug\netcoreapp2.1\YieldsApp.DAL.pdb
+D:\Projects\YieldsApp\YieldsApp\YieldsApp.DAL\obj\Debug\netcoreapp2.1\YieldsApp.DAL.csproj.CoreCompileInputs.cache
+D:\Projects\YieldsApp\YieldsApp\YieldsApp.DAL\obj\Debug\netcoreapp2.1\YieldsApp.DAL.AssemblyInfoInputs.cache
+D:\Projects\YieldsApp\YieldsApp\YieldsApp.DAL\obj\Debug\netcoreapp2.1\YieldsApp.DAL.AssemblyInfo.cs
+D:\Projects\YieldsApp\YieldsApp\YieldsApp.DAL\obj\Debug\netcoreapp2.1\YieldsApp.DAL.dll
+D:\Projects\YieldsApp\YieldsApp\YieldsApp.DAL\obj\Debug\netcoreapp2.1\YieldsApp.DAL.pdb
