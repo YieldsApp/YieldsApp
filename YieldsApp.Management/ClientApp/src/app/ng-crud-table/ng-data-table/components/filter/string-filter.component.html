@@ -1,0 +1,17 @@
+<select class="dt-input sm dt-form-group"
+        [(ngModel)]="matchMode"
+        (change)="onModeChange()">
+  <option *ngFor="let opt of operators" [value]="opt.value">{{opt.text | dtTranslate}}</option>
+</select>
+<input class="dt-input dt-form-group"
+       #filterInput
+       [attr.placeholder]="column.name"
+       *ngIf="isValueFilter"
+       [(ngModel)]="value"/>
+
+<div class="dt-list-divider"></div>
+<div class="dt-list-menu-row">
+  <button class="dt-button dt-button-sm" (click)="onClickOk()" *ngIf="isValueFilter">{{table.messages.ok | dtTranslate}}</button>
+  <button class="dt-button dt-button-sm" (click)="onClickCancel()">{{table.messages.cancel | dtTranslate}}</button>
+  <button class="dt-button dt-button-sm" (click)="onClickClear()">{{table.messages.clear | dtTranslate}}</button>
+</div>

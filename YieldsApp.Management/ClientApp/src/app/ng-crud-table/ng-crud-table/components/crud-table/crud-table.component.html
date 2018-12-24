@@ -1,0 +1,20 @@
+<dt-toolbar #toolbar
+            [table]="dataManager"
+            [createAction]="dataManager.settings.crud"
+            [globalFilter]="dataManager.settings.globalFilter"
+            [exportAction]="dataManager.settings.exportAction"
+            (create)="createAction()">
+</dt-toolbar>
+
+<app-data-table [table]="dataManager"></app-data-table>
+
+<app-modal-edit-form #modalEditForm [dataManager]="dataManager" (loaded)="onLoadedForm()">
+</app-modal-edit-form>
+
+<ng-template #rowActionTemplate let-row="row">
+  <button class="dt-button-actions" (click)="onRowMenuClick($event, row)">
+    <i class="dt-icon-actions"></i>
+  </button>
+</ng-template>
+
+<app-context-menu #rowMenu [menu]="actionMenu"></app-context-menu>

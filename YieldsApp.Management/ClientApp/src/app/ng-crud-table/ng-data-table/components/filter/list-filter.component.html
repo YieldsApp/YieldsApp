@@ -1,0 +1,13 @@
+<i class="dt-loader" *ngIf="loading"></i>
+<app-select-list *ngIf="!loading"
+                 [options]="column.filterValues"
+                 [selected]="selectedOptions"
+                 [multiple]="column.multiSelectFilter"
+                 [isOpen]="isOpen"
+                 [selectAllMessage]="table.messages.selectAll | dtTranslate"
+                 [cancelMessage]="table.messages.cancel | dtTranslate"
+                 [clearMessage]="table.messages.clear | dtTranslate"
+                 [searchMessage]="table.messages.search | dtTranslate"
+                 (selectionChange)="onSelectionChange($event)"
+                 (selectionCancel)="onSelectionCancel()">
+</app-select-list>

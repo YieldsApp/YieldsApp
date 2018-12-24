@@ -1,0 +1,42 @@
+<app-scroller
+  [items]="table.rows"
+  [virtualScroll]="table.settings.virtualScroll"
+  [rowHeight]="table.dimensions.rowHeight"
+  [scrollHeight]="table.dimensions.bodyHeight"
+  [itemsPerRow]="table.pager.perPage"
+  [rowHeightProp]="table.settings.rowHeightProp"
+  (scroll)=onScroll($event)>
+  <ng-container *ngFor="let row of scroller.viewRows; trackBy: rowTrackingFn">
+
+    <dt-body-group-row
+      *ngIf="table.rowGroup.isRowGroup(row)"
+      [table]="table"
+      [row]="row">
+    </dt-body-group-row>
+
+    <dt-body-row
+      [table]="table"
+      [row]="row">
+    </dt-body-row>
+
+    <dt-summary-row
+      *ngIf="table.rowGroup.isRowGroupSummary(row)"
+      [table]="table"
+      [row]="table.rowGroup.getRowGroupSummary(row)">
+    </dt-summary-row>
+  </ng-container>
+
+  <dt-summary-row
+    *ngIf="table.rowGroup.aggregationEnabled()"
+    [table]="table"
+    [row]="table.rowGroup.grandTotalRow">
+  </dt-summary-row>
+
+  <div class="datatable-empty-row"
+       *ngIf="!table.rows?.length"
+       [style.width.px]="table.dimensions.columnsTotalWidth">
+    <ng-container *ngIf="loading">{{table.messages.loading | dtTranslate}}</ng-container>
+    <ng-container *ngIf="!loading">{{table.messages.empty | dtTranslate}}</ng-container>
+  </div>
+
+</app-scroller>

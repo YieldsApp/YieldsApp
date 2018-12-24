@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 
 //packages
 import { AgmCoreModule } from '@agm/core';
+import { CrudTableModule } from './ng-crud-table/ng-crud-table';
 
 //primeng
 import { ButtonModule } from 'primeng/button';
@@ -22,6 +23,8 @@ import { SelectCropComponent } from './pages/select-crop/select-crop.component';
 import { LoginComponent } from './pages/login/login.component';
 import { GooglePlacesDirective } from './google-places.directive';
 import { LocationComponent } from './pages/location/location.component';
+import { FarmsComponent } from './pages/farms/farms.component';
+import { FarmComponent } from './pages/farm/farm.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { LocationComponent } from './pages/location/location.component';
     SelectCropComponent,
     LoginComponent,
     GooglePlacesDirective,
-    LocationComponent
+    LocationComponent,
+    FarmsComponent,
+    FarmComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -43,6 +48,8 @@ import { LocationComponent } from './pages/location/location.component';
     ButtonModule,
     AutoCompleteModule,
     AppRoutingModule,
+    CrudTableModule,
+
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC9PnuRk42kbCPMOvsfHpn40r5SoyN38zI',
       libraries: ['places', 'drawing', 'geometry'],

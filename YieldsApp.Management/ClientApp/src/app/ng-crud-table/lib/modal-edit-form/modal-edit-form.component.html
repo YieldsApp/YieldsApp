@@ -1,0 +1,34 @@
+<app-modal #childModal [modalTitle]="modalTitle | dtTranslate" [width]="500" [zIndex]="dataManager.settings.zIndexModal">
+  <ng-container class="app-modal-body">
+    <div *ngIf="childModal.visible">
+      <app-dynamic-form
+        *ngIf="!detailView"
+        [dynElements]="dynElements"
+        [item]="dataManager.item"
+        [isNewItem]="isNewItem"
+        [getOptionsFunc]="getOptionsFunc"
+        [selectPlaceholder]="dataManager.messages.selectPlaceholder | dtTranslate"
+        [searchInputPlaceholder]="dataManager.messages.search | dtTranslate"
+        (valid)="onFormValid($event)"
+        (loaded)="loaded.emit($event)">
+      </app-dynamic-form>
+      <app-row-view
+        *ngIf="detailView"
+        [transposedData]="transposedData"
+        [headerKeyMessage]="dataManager.messages.column | dtTranslate"
+        [headerValueMessage]="dataManager.messages.value | dtTranslate">
+      </app-row-view>
+    </div>
+  </ng-container>
+  <ng-container class="app-modal-footer">
+    <button class="dt-button"
+            [style.visibility]="!detailView ? 'visible': 'hidden'"
+            (click)="save()"
+            [disabled]="!formValid">{{dataManager.messages.save | dtTranslate}}
+    </button>
+    <button class="dt-button dt-green"
+            style="float: right;"
+            (click)="close()">{{dataManager.messages.close | dtTranslate}}
+    </button>
+  </ng-container>
+</app-modal>
