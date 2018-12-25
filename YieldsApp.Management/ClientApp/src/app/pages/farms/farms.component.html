@@ -1,3 +1,13 @@
 
 <app-crud-table [dataManager]="dataManager"></app-crud-table>
+<div class="dt-toolbar-row">
+  <div class="dt-toolbar-col" *ngIf="createAction">
+    <button class="dt-button"
+            (click)="createAction()">Create
+    </button>
+  </div>
+</div>
 
+
+
+<app-data-table [table]="fieldsTable"></app-data-table>

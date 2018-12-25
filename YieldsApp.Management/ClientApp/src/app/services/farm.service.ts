@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { DataSource, RequestMetadata, PagedResult } from '../ng-crud-table/ng-crud-table';
-import { DataSort, DataFilter } from '../ng-crud-table/ng-data-table/base';
+import { DataSource, RequestMetadata, PagedResult } from '../components/ng-crud-table/ng-crud-table';
+import { DataSort, DataFilter } from '../components/ng-crud-table/ng-data-table/base';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FarmService implements DataSource {
-  url: string = 'assets/players.json';
+  url: string = 'assets/farms.json';
   primaryKeys: string[] = ['id'];
 
   private dataFilter: DataFilter;

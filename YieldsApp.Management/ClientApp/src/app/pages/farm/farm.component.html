@@ -1,3 +1,21 @@
-<p>
-  farm works!
-</p>
+<div class="container">
+  <h1>{{title}}</h1>
+  <form [formGroup]="fieldForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Field Name</label>
+      <input type="text" formControlName="fieldName" class="form-control"  />
+      <div *ngIf="submitted && f.fieldName.errors" class="invalid-feedback">
+        <div *ngIf="f.fieldName.errors.required">Field Name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label >Location</label>
+      <ya-location></ya-location>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-primary">Register</button>
+    </div>
+
+  </form>
+</div>

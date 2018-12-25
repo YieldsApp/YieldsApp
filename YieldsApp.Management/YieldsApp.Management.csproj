@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\models\FieldModel.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -17,6 +21,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\YieldsApp.DAL\YieldsApp.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\FieldModel.ts" />
   </ItemGroup>
 
 </Project>

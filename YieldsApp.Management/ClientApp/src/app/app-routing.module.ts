@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SelectCropComponent } from './pages/select-crop/select-crop.component';
 import { LoginComponent } from './pages/login/login.component';
-import { LocationComponent } from './pages/location/location.component';
 import { FarmsComponent } from './pages/farms/farms.component';
+import { FarmComponent } from './pages/farm/farm.component';
 
 @NgModule({
   imports: [
@@ -12,10 +12,10 @@ import { FarmsComponent } from './pages/farms/farms.component';
     RouterModule.forRoot([
       // { path: '', component: LocationComponent, pathMatch: 'full' },
       { path: '', component: SelectCropComponent },
-      { path: 'location', component: LocationComponent },
       { path: 'crop', component: SelectCropComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'farms', component: FarmsComponent }
+      { path: 'farms', component: FarmsComponent },
+      { path: 'farm/:id', component: FarmComponent },
     ]),
   ],
   exports: [RouterModule]

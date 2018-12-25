@@ -130,11 +130,11 @@
   "defaultProject": "YieldsApp",
   "schematics": {
     "@schematics/angular:component": {
-      "prefix": "app",
+      "prefix": "ya",
       "styleext": "scss"
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": "ya"
     }
   }
 }

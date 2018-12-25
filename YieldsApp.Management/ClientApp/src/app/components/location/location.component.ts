@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 
 declare const google: any;
 @Component({
-  selector: 'app-location',
+  selector: 'ya-location',
   templateUrl: './location.component.html',
   styleUrls: ['./location.component.scss']
 })
@@ -47,7 +47,7 @@ export class LocationComponent implements AfterViewInit {
         var computeArea = google.maps.geometry.spherical.computeArea(this.polygon.getPath());
         console.log("computeArea", computeArea);
         //this is the coordinate, you can assign it to a variable or pass into another function.
-       // alert(event.overlay.getPath().getArray());
+        // alert(event.overlay.getPath().getArray());
       }
     });
   }
