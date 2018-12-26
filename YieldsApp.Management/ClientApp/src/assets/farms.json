@@ -7,38 +7,41 @@
       "lat": -25.363,
       "lng": 131.044
     },
-    "fields": {
-      "fieldName": "field 1",
-      "polygonLocations": [
-        {
-          "lat": -25.363,
-          "lng": 131.044
-        }
-      ],
-      "area": 10.5,
-      "sections": [
-        {
-          "sectionName": "A",
-          "area": 4,
-          "cropName": "tomato",
-          "varietyName": "tamar",
-          "plantingDate": "12/10/2018",
-          "gdd": 805,
-          "etc": 3.5
-        },
-        {
-          "sectionName": "B",
-          "area": 6.5,
-          "crop": {
+    "fields": [
+      {
+        "fieldId": 1,
+        "fieldName": "field 1",
+        "polygonLocations": [
+          {
+            "lat": -25.363,
+            "lng": 131.044
+          }
+        ],
+        "area": 10.5,
+        "sections": [
+          {
+            "sectionName": "A",
+            "area": 4,
             "cropName": "tomato",
-            "cropId": "1"
+            "varietyName": "tamar",
+            "plantingDate": "12/10/2018",
+            "gdd": 805,
+            "etc": 3.5
           },
-          "plantingDate": "12/10/2018",
-          "gdd": 805,
-          "etc": 3.5
-        }
-      ]
-    }
+          {
+            "sectionName": "B",
+            "area": 6.5,
+            "crop": {
+              "cropName": "tomato",
+              "cropId": "1"
+            },
+            "plantingDate": "12/10/2018",
+            "gdd": 805,
+            "etc": 3.5
+          }
+        ]
+      }
+    ]
   },
   {
     "farmId": 2,
@@ -48,38 +51,41 @@
       "lat": -25.363,
       "lng": 131.044
     },
-    "fields": {
-      "fieldName": "field 1",
-      "polygonLocations": [
-        {
-          "lat": -25.363,
-          "lng": 131.044
-        }
-      ],
-      "area": 10.5,
-      "sections": [
-        {
-          "sectionName": "A",
-          "area": 4,
-          "cropName": "tomato",
-          "varietyName": "tamar",
-          "plantingDate": "12/10/2018",
-          "gdd": 805,
-          "etc": 3.5
-        },
-        {
-          "sectionName": "B",
-          "area": 6.5,
-          "crop": {
+    "fields": [
+      {
+        "fieldId": 3,
+        "fieldName": "field 1",
+        "polygonLocations": [
+          {
+            "lat": -25.363,
+            "lng": 131.044
+          }
+        ],
+        "area": 10.5,
+        "sections": [
+          {
+            "sectionName": "A",
+            "area": 4,
             "cropName": "tomato",
-            "cropId": "1"
+            "varietyName": "tamar",
+            "plantingDate": "12/10/2018",
+            "gdd": 805,
+            "etc": 3.5
           },
-          "plantingDate": "12/10/2018",
-          "gdd": 805,
-          "etc": 3.5
-        }
-      ]
-    }
+          {
+            "sectionName": "B",
+            "area": 6.5,
+            "crop": {
+              "cropName": "tomato",
+              "cropId": "1"
+            },
+            "plantingDate": "12/10/2018",
+            "gdd": 805,
+            "etc": 3.5
+          }
+        ]
+      }
+    ]
   }
 
 ]

@@ -20,15 +20,15 @@ export class FarmsComponent implements OnInit {
   dataManager: DataManager;
 
   dtFields: DataTable;
-
+  columnsFields: Column[];
   settingsFields: Settings = <Settings>{
-    bodyHeight: 250,
+    bodyHeight: 150,
   };
 
 
   settings: CdtSettings = <CdtSettings>{
     crud: true,
-    bodyHeight: 380,
+    bodyHeight: 150,
     exportAction: true,
     globalFilter: true,
   };
@@ -74,7 +74,39 @@ export class FarmsComponent implements OnInit {
     this.dataManager = new DataManager(this.columns, this.settings, this.service, this.messages);
     this.dataManager.pager.perPage = 20;
 
-    this.dtFields = new DataTable(this.columns, this.settingsFields);
+
+    this.columnsFields = [
+      {
+        title: 'Id',
+        name: 'fieldId',
+        sortable: true,
+        filter: true,
+        frozen: true,
+        width: 100,
+        formHidden: true,
+        type: 'number',
+      },
+      {
+        title: 'Name',
+        name: 'fieldName',
+        sortable: true,
+        filter: true,
+        frozen: true,
+        width: 200,
+        validatorFunc: Validators.get({ required: true, minLength: 2, pattern: '^[a-zA-Z ]+$' }),
+        editable: true,
+      },
+      {
+        title: 'Area',
+        name: 'area',
+        sortable: true,
+        filter: true,
+        frozen: true,
+        width: 200,
+        validatorFunc: Validators.get({ required: true }),
+        editable: true,
+      }];
+    this.dtFields = new DataTable(this.columnsFields, this.settingsFields);
 
 
   }
@@ -86,7 +118,7 @@ export class FarmsComponent implements OnInit {
 
   farmChanged() {
     const selection = this.dataManager.getSelection();
-    if (this.dataManager.rows.length > 0 && selection.length !== 0 && this.dataManager.rows[selection[0]]) {
+    if (this.dataManager.rows.length > 0 && selection.length !== 0 && selection[0].fields) {
       //debugger;
       this.dtFields.rows = selection[0].fields;
     }

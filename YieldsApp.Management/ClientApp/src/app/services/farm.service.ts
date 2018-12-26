@@ -72,6 +72,7 @@ export class FarmService implements DataSource {
   }
 
   post(item: any): Promise<any> {
+    item.farmId = ++this.lastId;
     // this.data.items.push(item); // exist in component
     return new Promise((resolve) => {
       setTimeout(() => resolve(item), 250);
@@ -79,7 +80,6 @@ export class FarmService implements DataSource {
   }
 
   put(item: any): Promise<any> {
-    item.farmId = ++this.lastId;
     // this.data.items[this.findSelectedItemIndex(item)] = item; // exist in component
     return new Promise((resolve) => {
       setTimeout(() => resolve(item), 250);
