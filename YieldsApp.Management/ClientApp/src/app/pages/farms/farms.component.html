@@ -1,13 +1,17 @@
 
 <app-crud-table [dataManager]="dataManager"></app-crud-table>
-<div class="dt-toolbar-row">
-  <div class="dt-toolbar-col" *ngIf="createAction">
-    <button class="dt-button"
-            (click)="createAction()">Create
-    </button>
+
+<app-crud-table [dataManager]="dataManager" (select)="farmChanged()"></app-crud-table>
+<div style="display:flex;">
+  <div style="width: 59%;">
+    <div class="dt-toolbar-row">
+      <div class="dt-toolbar-col" *ngIf="createAction">
+        <button class="dt-button"
+                (click)="createAction()">
+          Create
+        </button>
+      </div>
+    </div>
+    <app-data-table [table]="dtFields"></app-data-table>
   </div>
 </div>
-
-
-
-<app-data-table [table]="fieldsTable"></app-data-table>

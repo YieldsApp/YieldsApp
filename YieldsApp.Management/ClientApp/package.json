@@ -29,7 +29,7 @@
     "@types/mocha": "^5.2.5",
     "angular2-google-map-auto-complete": "^2.0.9",
     "aspnet-prerendering": "^3.0.1",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.0",
     "core-js": "^2.5.4",
     "lodash": "^4.17.11",
     "primeicons": "^1.0.0",

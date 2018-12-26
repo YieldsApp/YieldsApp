@@ -19,12 +19,11 @@ export class FarmsComponent implements OnInit {
   columns: Column[];
   dataManager: DataManager;
 
-  fieldsTable: DataTable;
+  dtFields: DataTable;
 
-  fieldsSettings: Settings =  {
-    clientSide: true,
-    columnResizeMode: 'aminated',
-  } as any as  Settings;
+  settingsFields: Settings = <Settings>{
+    bodyHeight: 250,
+  };
 
 
   settings: CdtSettings = <CdtSettings>{
@@ -44,7 +43,7 @@ export class FarmsComponent implements OnInit {
     this.columns = [
         {
           title: 'Id',
-          name: 'id',
+        name: 'farmId',
           sortable: true,
           filter: true,
           frozen: true,
@@ -54,24 +53,46 @@ export class FarmsComponent implements OnInit {
         },
         {
           title: 'Name',
-          name: 'name',
+          name: 'farmName',
           sortable: true,
           filter: true,
           frozen: true,
           width: 200,
           validatorFunc: Validators.get({ required: true, minLength: 2, pattern: '^[a-zA-Z ]+$' }),
           editable: true,
-        }];
+      },
+      {
+        title: 'Description',
+        name: 'description',
+        sortable: true,
+        filter: true,
+        frozen: true,
+        width: 200,
+        validatorFunc: Validators.get({ required: true, minLength: 2 }),
+        editable: true,
+      }];
     this.dataManager = new DataManager(this.columns, this.settings, this.service, this.messages);
     this.dataManager.pager.perPage = 20;
 
-    this.fieldsTable = new DataTable(this.columns, this.settings);
+    this.dtFields = new DataTable(this.columns, this.settingsFields);
+
 
   }
 
   ngOnInit() {
     //this.fieldsTable.rows = data;
-    this.fieldsTable.events.onLoading(false);
+    this.dtFields.events.onLoading(false);
+  }
+
+  farmChanged() {
+    const selection = this.dataManager.getSelection();
+    if (this.dataManager.rows.length > 0 && selection.length !== 0 && this.dataManager.rows[selection[0]]) {
+      //debugger;
+      this.dtFields.rows = selection[0].fields;
+    }
+    else {
+      this.dtFields.rows = [];
+    }
   }
   createAction() {
     const id = 1;

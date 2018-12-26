@@ -8,8 +8,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FarmService implements DataSource {
   url: string = 'assets/farms.json';
-  primaryKeys: string[] = ['id'];
-
+  primaryKeys: string[] = ['farmId'];
+  lastId: 0;
   private dataFilter: DataFilter;
   private dataSort: DataSort;
 
@@ -29,6 +29,10 @@ export class FarmService implements DataSource {
       .toPromise()
       .then(function (res) {
         const rows: any[] = res || [];
+
+        if (rows.length > 0)
+          this.lastId = rows[rows.length - 1].farmId;
+
         const filteredData = this.dataFilter.filterRows(rows);
         const sortedData = this.dataSort.sortRows(filteredData);
         const pageData = this.page(sortedData, page, perPage);
@@ -75,6 +79,7 @@ export class FarmService implements DataSource {
   }
 
   put(item: any): Promise<any> {
+    item.farmId = ++this.lastId;
     // this.data.items[this.findSelectedItemIndex(item)] = item; // exist in component
     return new Promise((resolve) => {
       setTimeout(() => resolve(item), 250);
