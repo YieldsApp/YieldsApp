@@ -1,6 +1,7 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 
 declare const google: any;
+
 @Component({
   selector: 'ya-location',
   templateUrl: './location.component.html',
@@ -8,6 +9,9 @@ declare const google: any;
 })
 export class LocationComponent implements AfterViewInit {
 
+
+  @Input() coordinates: any[];
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   map: any;
   drawingManager: any;
   polygon: any;
@@ -22,9 +26,24 @@ export class LocationComponent implements AfterViewInit {
   drawPolygon() {
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: -34.397, lng: 150.644 },
-      zoom: 8,
+      zoom: 10,
       mapTypeId: google.maps.MapTypeId.SATELLITE
     });
+
+    // Construct the polygon.
+    if (this.coordinates.length > 0) {
+      console.log("Construct the polygon.")
+      this.polygon = new google.maps.Polygon({
+        paths: this.coordinates,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 3,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35
+      });
+      this.polygon.setMap(this.map);
+    }
+
 
     this.drawingManager = new google.maps.drawing.DrawingManager({
       drawingMode: google.maps.drawing.OverlayType.POLYGON,
@@ -37,19 +56,17 @@ export class LocationComponent implements AfterViewInit {
 
     this.drawingManager.setMap(this.map);
     google.maps.event.addListener(this.drawingManager, 'overlaycomplete', (event) => {
-      // Polygon drawn
       if (event.type === google.maps.drawing.OverlayType.POLYGON) {
         if (this.polygon) {
           this.polygon.setMap(null);
         }
         this.polygon = event.overlay;
 
-        var computeArea = google.maps.geometry.spherical.computeArea(this.polygon.getPath());
-        console.log("computeArea", computeArea);
-        //this is the coordinate, you can assign it to a variable or pass into another function.
-        // alert(event.overlay.getPath().getArray());
-      }
+        const computeArea = google.maps.geometry.spherical.computeArea(this.polygon.getPath());
+        const coordinates = event.overlay.getPath().getArray();
+        this.onChange.emit({ coordinates: coordinates, area: computeArea })};
     });
   }
+
 
 }

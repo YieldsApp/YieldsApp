@@ -25,6 +25,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { LocationComponent } from './components/location/location.component';
 import { FarmsComponent } from './pages/farms/farms.component';
 import { FarmComponent } from './pages/farm/farm.component';
+import { EditFieldComponent } from './components/edit-field/edit-field.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FarmComponent } from './pages/farm/farm.component';
     LocationComponent,
     FarmsComponent,
     FarmComponent,
+    EditFieldComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

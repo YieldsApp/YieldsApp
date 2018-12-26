@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FieldModel } from "../../models/FieldModel";
+import { UnitsService } from "../../services/units.service";
 
 @Component({
   selector: 'app-farm',
@@ -11,9 +13,16 @@ export class FarmComponent implements OnInit {
   fieldForm: FormGroup;
   submitted = false;
   title: string;
-  constructor(private formBuilder: FormBuilder) { }
+  field: FieldModel ;
+
+
+  constructor(private formBuilder: FormBuilder,public unit: UnitsService) {
+    this.route.snapshot.params['id']
+
+  }
 
   ngOnInit() {
+    this.field = new FieldModel();
     this.fieldForm = this.formBuilder.group({
       fieldName: ['', Validators.required]
     });
@@ -23,6 +32,15 @@ export class FarmComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.fieldForm.controls; }
 
+  locationChanged(data: { coordinates: any[], area: number }) {
+    debugger;
+
+
+    this.unit.convertGoogleMapUnits(data.area);
+    this.field.coordinates = data.coordinates;
+    this.field.area = data.area;
+  }
+
   onSubmit() {
     this.submitted = true;
 
@@ -30,8 +48,10 @@ export class FarmComponent implements OnInit {
     if (this.fieldForm.invalid) {
       return;
     }
-
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.fieldForm.value))
+    this.field.fieldName = this.fieldForm.value.fieldName;
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.field));
   }
+
+
 
 }
