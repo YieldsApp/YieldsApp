@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FarmComponent } from './farm.component';
+import { EditFieldComponent } from './edit-field.component';
 
-describe('FarmComponent', () => {
-  let component: FarmComponent;
-  let fixture: ComponentFixture<FarmComponent>;
+describe('EditFieldComponent', () => {
+  let component: EditFieldComponent;
+  let fixture: ComponentFixture<EditFieldComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FarmComponent ]
+      declarations: [ EditFieldComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FarmComponent);
+    fixture = TestBed.createComponent(EditFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

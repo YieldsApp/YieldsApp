@@ -1,6 +1,3 @@
-using YieldsApp.DAL;
-using YieldsApp.DAL.Models;
-using YieldsApp.DAL.Repositories;
 using YieldsApp.Identification.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Newtonsoft.Json.Serialization;
+using YieldsApp.DO;
+using YieldsApp.General.DL.Repositories;
 
 namespace YieldsApp.Identification
 {
@@ -33,10 +32,16 @@ namespace YieldsApp.Identification
             services.AddMvc()
                 //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            var configurationSection = Configuration.GetSection("ConnectionStrings:DefaultConnection");
-            services.AddDbContext<YieldsAppContext>(options => options
-            .UseLoggerFactory(MyLoggerFactory)
-            .UseSqlServer(configurationSection.Value));
+
+            services.Configure<Settings>(
+                options =>
+                {
+                    options.ConnectionString =
+                        Configuration.GetSection("MongoDb:ConnectionString").Value;
+                    options.Database = Configuration.GetSection("MongoDb:Database").Value;
+                    options.GeneralDatabase = Configuration.GetSection("MongoDb:Database").Value;
+                });
+
             services.AddScoped<ICropRepository, CropRepository>();
 
 
@@ -51,10 +56,10 @@ namespace YieldsApp.Identification
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
 
-            AutoMapper.Mapper.Initialize(config =>
-            {
-                config.CreateMap<Crop, CropModel>().ReverseMap();
-            });
+            //AutoMapper.Mapper.Initialize(config =>
+            //{
+            //    config.CreateMap<Crop, CropModel>().ReverseMap();
+            //});
 
             if (env.IsDevelopment())
             {

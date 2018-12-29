@@ -4,7 +4,9 @@ import { RouterModule } from '@angular/router';
 import { SelectCropComponent } from './pages/select-crop/select-crop.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FarmsComponent } from './pages/farms/farms.component';
-import { FarmComponent } from './pages/farm/farm.component';
+import { AddFieldComponent } from './pages/add-field/add-field.component';
+import { EditFieldComponent } from './pages/edit-field/edit-field.component';
+
 
 @NgModule({
   imports: [
@@ -15,7 +17,8 @@ import { FarmComponent } from './pages/farm/farm.component';
       { path: 'crop', component: SelectCropComponent },
       { path: 'login', component: LoginComponent },
       { path: 'farms', component: FarmsComponent },
-      { path: 'farm/:id', component: FarmComponent },
+      { path: 'edit-field/:farmId/:fieldId', component: EditFieldComponent },
+      { path: 'add-field/:farmId', component: AddFieldComponent },
     ]),
   ],
   exports: [RouterModule]

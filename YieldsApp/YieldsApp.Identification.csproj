@@ -13,10 +13,13 @@
     <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="MongoDB.Driver" Version="2.7.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\YieldsApp.DAL\YieldsApp.DAL.csproj" />
+    <ProjectReference Include="..\YieldsApp.DAL\YieldsApp.DL.csproj" />
+    <ProjectReference Include="..\YieldsApp.DO\YieldsApp.DO.csproj" />
+    <ProjectReference Include="..\YieldsApp.General.DAL\YieldsApp.General.DL.csproj" />
   </ItemGroup>
 
 </Project>

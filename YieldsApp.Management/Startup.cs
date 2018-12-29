@@ -1,6 +1,3 @@
-using YieldsApp.DAL;
-using YieldsApp.DAL.Models;
-using YieldsApp.DAL.Repositories;
 using YieldsApp.Management.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +9,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
+using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Driver;
 using Newtonsoft.Json.Serialization;
+using YieldsApp.DO;
+using YieldsApp.General.DL.Context;
+using YieldsApp.General.DL.Repositories;
 
 namespace YieldsApp.Management
 {
@@ -33,13 +35,22 @@ namespace YieldsApp.Management
             services.AddMvc()
                 //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            var configurationSection = Configuration.GetSection("ConnectionStrings:DefaultConnection");
-            services.AddDbContext<YieldsAppContext>(options => options
-            .UseLoggerFactory(MyLoggerFactory)
-            .UseSqlServer(configurationSection.Value));
+
+            var conventionPack = new ConventionPack { new CamelCaseElementNameConvention() };
+            ConventionRegistry.Register("camelCase", conventionPack, t => true);
+
+            services.Configure<Settings>(
+                options =>
+                {
+                    options.ConnectionString = Configuration.GetSection("MongoDb:ConnectionString").Value;
+                    options.Database = Configuration.GetSection("MongoDb:Database").Value;
+                    options.GeneralDatabase = Configuration.GetSection("MongoDb:GeneralDatabase").Value;
+                });
+
+            services.AddScoped<ICropContext, CropContext>();
             services.AddScoped<ICropRepository, CropRepository>();
-
-
+            services.AddSingleton<IMongoClient, MongoClient>(
+                _ => new MongoClient(Configuration.GetSection("MongoDb:ConnectionString").Value));
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -51,10 +62,10 @@ namespace YieldsApp.Management
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
 
-            AutoMapper.Mapper.Initialize(config =>
-            {
-                config.CreateMap<Crop, CropModel>().ReverseMap();
-            });
+            //AutoMapper.Mapper.Initialize(config =>
+            //{
+            //    config.CreateMap<Crop, CropModel>().ReverseMap();
+            //});
 
             if (env.IsDevelopment())
             {

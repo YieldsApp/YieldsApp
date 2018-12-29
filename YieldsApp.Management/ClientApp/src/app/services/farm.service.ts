@@ -1,78 +1,32 @@
 import { Injectable } from '@angular/core';
-import { DataSource, RequestMetadata, PagedResult } from '../components/ng-crud-table/ng-crud-table';
-import { DataSort, DataFilter } from '../components/ng-crud-table/ng-data-table/base';
 import { HttpClient } from '@angular/common/http';
+import { FarmModel } from '../models/farm-model';
+import { Observable } from 'rxjs';
+import { filter, map, mergeAll } from 'rxjs/operators';
+
+import  _  from 'lodash';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FarmService implements DataSource {
+export class FarmService  {
   url: string = 'assets/farms.json';
-  primaryKeys: string[] = ['farmId'];
-  lastId: 0;
-  private dataFilter: DataFilter;
-  private dataSort: DataSort;
+  data: FarmModel[];
 
   constructor(private http: HttpClient) {
-    this.dataFilter = new DataFilter();
-    this.dataSort = new DataSort();
   }
 
-  getItems(requestMeta: RequestMetadata): Promise<PagedResult> {
-    const page = requestMeta.pageMeta.currentPage;
-    this.dataFilter.filters = requestMeta.filters;
-    this.dataFilter.globalFilterValue = requestMeta.globalFilterValue;
-    this.dataSort.sortMeta = requestMeta.sortMeta;
-    const perPage = requestMeta.pageMeta.perPage;
-
-    return this.http.get<PagedResult>(this.url)
-      .toPromise()
-      .then(function (res) {
-        const rows: any[] = res || [];
-
-        if (rows.length > 0)
-          this.lastId = rows[rows.length - 1].farmId;
-
-        const filteredData = this.dataFilter.filterRows(rows);
-        const sortedData = this.dataSort.sortRows(filteredData);
-        const pageData = this.page(sortedData, page, perPage);
-        const totalCount = sortedData.length;
-        const pageCount = pageData.length;
-        const result = <PagedResult>{
-          'items': pageData,
-          '_meta': {
-            'totalCount': totalCount,
-            'pageCount': pageCount,
-            'currentPage': page,
-            'perPage': perPage
-          }
-        };
-        return result;
-      }.bind(this))
-      .catch(this.handleError);
+  getList(): Observable<FarmModel[]> {
+    return this.http.get <FarmModel[]>(this.url);
   }
 
-  getItem(row: any): Promise<any> {
-    const filters = {};
-    for (const key of this.primaryKeys) {
-      filters[key] = { value: row[key] };
-    }
-    const requestMeta = <RequestMetadata>{
-      pageMeta: { currentPage: 1 },
-      filters: filters,
-    };
-    return this.getItems(requestMeta)
-      .then(data => data.items[0]);
+  getItem(farmId: string): Observable<FarmModel> {
+    return this.getList().pipe(map(farms => _.filter(farms, farm => farm.farmId == farmId)), mergeAll()); 
   }
 
-  page(data: any, page: any, perPage: number): Array<any> {
-    const start = (page - 1) * perPage;
-    const end = perPage > -1 ? (start + perPage) : data.length;
-    return data.slice(start, end);
-  }
+ 
 
   post(item: any): Promise<any> {
-    item.farmId = ++this.lastId;
     // this.data.items.push(item); // exist in component
     return new Promise((resolve) => {
       setTimeout(() => resolve(item), 250);
@@ -103,19 +57,9 @@ export class FarmService implements DataSource {
         return new Promise((resolve) => {
           setTimeout(() => resolve(result), 1000);
         });
-      })
-      .catch(this.handleError);
+      });
+    // .catch(this.handleError);
   }
 
-  private handleError(error: any) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return Promise.reject(errorMessage);
-  }
+  
 }

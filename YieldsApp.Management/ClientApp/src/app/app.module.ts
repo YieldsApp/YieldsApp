@@ -24,8 +24,10 @@ import { SelectCropComponent } from './pages/select-crop/select-crop.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LocationComponent } from './components/location/location.component';
 import { FarmsComponent } from './pages/farms/farms.component';
-import { FarmComponent } from './pages/farm/farm.component';
 import { EditFieldComponent } from './components/edit-field/edit-field.component';
+import { AddFieldComponent } from './pages/add-field/add-field.component';
+import { EditFieldComponent as EditFieldPage } from './pages/edit-field/edit-field.component';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -35,10 +37,12 @@ import { EditFieldComponent } from './components/edit-field/edit-field.component
     LoginComponent,
     LocationComponent,
     FarmsComponent,
-    FarmComponent,
     EditFieldComponent,
+    AddFieldComponent,
+    EditFieldPage,
   ],
   imports: [
+    NgbCollapseModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
@@ -51,12 +55,12 @@ import { EditFieldComponent } from './components/edit-field/edit-field.component
     AppRoutingModule,
     CrudTableModule,
     DataTableModule,
-
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC9PnuRk42kbCPMOvsfHpn40r5SoyN38zI',
       libraries: ['places', 'drawing', 'geometry'],
 
-    }),
+    })
+
   ],
   providers: [],
   bootstrap: [AppComponent]

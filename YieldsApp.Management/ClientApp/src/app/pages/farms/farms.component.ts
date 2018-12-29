@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Column, CdtSettings, DataManager } from "../../components/ng-crud-table/ng-crud-table";
@@ -6,8 +6,9 @@ import { DtMessages } from "../../components/ng-crud-table/lib/dt-translate";
 import { SelectItem } from '../../components/ng-crud-table/lib/common';
 import { Validators } from '../../components/ng-crud-table/lib/validation/validators';
 import { FarmService } from "../../services/farm.service";
-import { Settings, DataTable } from '../../components/ng-crud-table/ng-data-table';
-
+import { Settings, Column as DataTableColumn, DataTable } from '../../components/ng-crud-table/ng-data-table';
+import { FarmTableService } from '../../services/farm-table.service';
+import { FieldModel } from '../../models/FieldModel';
 
 
 @Component({
@@ -16,13 +17,19 @@ import { Settings, DataTable } from '../../components/ng-crud-table/ng-data-tabl
   styleUrls: ['./farms.component.scss']
 })
 export class FarmsComponent implements OnInit {
+  @ViewChild('cellTemplate') cellTemplate: TemplateRef<any>;
+
   columns: Column[];
   dataManager: DataManager;
 
   dtFields: DataTable;
-  columnsFields: Column[];
+  columnsFields: DataTableColumn[];
+  actionColumnField: number=3;
   settingsFields: Settings = <Settings>{
-    bodyHeight: 150,
+    headerRowHeight: 40,
+    rowHeight: 40,
+    actionColumnWidth: 0
+
   };
 
 
@@ -38,8 +45,8 @@ export class FarmsComponent implements OnInit {
     titleCreate: 'Create a new farm'
   };
 
-  constructor(private service: FarmService, private router: Router) {
-
+  constructor(private service: FarmTableService, private router: Router) {
+    
     this.columns = [
         {
           title: 'Id',
@@ -74,7 +81,7 @@ export class FarmsComponent implements OnInit {
     this.dataManager = new DataManager(this.columns, this.settings, this.service, this.messages);
     this.dataManager.pager.perPage = 20;
 
-
+    
     this.columnsFields = [
       {
         title: 'Id',
@@ -97,14 +104,21 @@ export class FarmsComponent implements OnInit {
         editable: true,
       },
       {
-        title: 'Area',
-        name: 'area',
+        title: 'Actions',
+        name: 'fieldId',
         sortable: true,
         filter: true,
         frozen: true,
         width: 200,
         validatorFunc: Validators.get({ required: true }),
         editable: true,
+      }, {
+        title: 'Template',
+        name: 'area',
+        sortable: false,
+        filter: false,
+        frozen: true,
+        width: 200
       }];
     this.dtFields = new DataTable(this.columnsFields, this.settingsFields);
 
@@ -114,6 +128,7 @@ export class FarmsComponent implements OnInit {
   ngOnInit() {
     //this.fieldsTable.rows = data;
     this.dtFields.events.onLoading(false);
+    this.dtFields.columns[this.actionColumnField].cellTemplate = this.cellTemplate;
   }
 
   farmChanged() {
@@ -127,7 +142,14 @@ export class FarmsComponent implements OnInit {
     }
   }
   createAction() {
-    const id = 1;
-    this.router.navigate(['/farm', id]);
+    const selection = this.dataManager.getSelection();
+    if (this.dataManager.rows.length && selection.length !== 0)
+      this.router.navigate(['/add-field', selection[0].farmId]);
+  }
+  editAction(row: FieldModel) {
+    const selection = this.dataManager.getSelection();
+    if (this.dataManager.rows.length && selection.length !== 0)
+      this.router.navigate(['/edit-field',  selection[0].farmId, row.fieldId]);
+
   }
 }

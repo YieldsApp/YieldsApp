@@ -1,3 +1,24 @@
-<p>
-  edit-field works!
-</p>
+<form [formGroup]="fieldForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label>Farm Name</label>
+    <input type="text" formControlName="farmName" readonly="true" class="form-control" />   
+  </div> <div class="form-group">
+    <label>Field Name</label>
+    <input type="text" formControlName="fieldName" class="form-control " [ngClass]="{ 'is-valid': submitted && f.fieldName.valid,'is-invalid': submitted && f.fieldName.errors} " />
+    <div *ngIf="submitted && f.fieldName.errors" class="invalid-feedback">
+      <div *ngIf="f.fieldName.errors.required">Field Name is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Location</label>
+    <ya-location [coordinates]="field.coordinates" (onChange)="locationChanged($event)"></ya-location>
+  </div>
+  <div class="form-group">
+    <label>Area</label>
+    <p class="form-control-static">{{field.area | number:'0.1-3'}} {{unit.userAreaUnit.symbol }}</p>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary">Save</button>
+  </div>
+
+</form>

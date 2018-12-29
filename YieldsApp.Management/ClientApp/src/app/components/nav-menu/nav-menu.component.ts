@@ -1,18 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
-  styleUrls: ['./nav-menu.component.css']
+  styleUrls: ['./nav-menu.component.scss']
 })
 export class NavMenuComponent {
-  isExpanded = false;
+  @ViewChild('navbarToggler') navbarToggler: ElementRef;
 
-  collapse() {
-    this.isExpanded = false;
+  collapseNav() {
+    if (this.navBarTogglerIsVisible()) {
+      console.log('collapseNav in NavigationComponent clicking navbarToggler');
+      this.navbarToggler.nativeElement.click();
+    }
   }
 
-  toggle() {
-    this.isExpanded = !this.isExpanded;
+  private navBarTogglerIsVisible() {
+    const isVisible: boolean = (this.navbarToggler.nativeElement.offsetParent !== null);
+    return isVisible;
   }
 }

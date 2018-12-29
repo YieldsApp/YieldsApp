@@ -13,5 +13,11 @@
       </div>
     </div>
     <app-data-table [table]="dtFields"></app-data-table>
+    <ng-template #cellTemplate let-row="row" let-value="value">
+      <button class="dt-button"
+              (click)="editAction(row)">
+        Edit
+      </button>
+    </ng-template>
   </div>
 </div>
