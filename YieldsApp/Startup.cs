@@ -1,15 +1,11 @@
-using YieldsApp.Identification.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
-using Newtonsoft.Json.Serialization;
 using YieldsApp.DO;
 using YieldsApp.General.DL.Repositories;
 
@@ -17,14 +13,15 @@ namespace YieldsApp.Identification
 {
     public class Startup
     {
+        public static readonly LoggerFactory MyLoggerFactory
+            = new LoggerFactory(new[] {new ConsoleLoggerProvider((_, __) => true, true)});
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
-        public static readonly LoggerFactory MyLoggerFactory
-            = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -46,16 +43,12 @@ namespace YieldsApp.Identification
 
 
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
             //AutoMapper.Mapper.Initialize(config =>
             //{
             //    config.CreateMap<Crop, CropModel>().ReverseMap();
@@ -78,8 +71,8 @@ namespace YieldsApp.Identification
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                    "default",
+                    "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>
@@ -89,10 +82,7 @@ namespace YieldsApp.Identification
 
                 spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
+                if (env.IsDevelopment()) spa.UseAngularCliServer("start");
             });
         }
     }

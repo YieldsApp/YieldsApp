@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YieldsApp.DO
+﻿namespace YieldsApp.DO
 {
     public class Settings
     {

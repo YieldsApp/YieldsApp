@@ -21,9 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\YieldsApp.BL\YieldsApp.BL.csproj" />
     <ProjectReference Include="..\YieldsApp.DAL\YieldsApp.DL.csproj" />
     <ProjectReference Include="..\YieldsApp.DO\YieldsApp.DO.csproj" />
     <ProjectReference Include="..\YieldsApp.General.DAL\YieldsApp.General.DL.csproj" />
+    <ProjectReference Include="..\YieldsApp.Instance.DL\YieldsApp.Instance.DL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

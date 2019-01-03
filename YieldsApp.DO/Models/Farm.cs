@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace YieldsApp.DO.Models
 {
-
-    public class Farm
+    public class Farm : BaseModel
     {
-        [BsonId]
-        public ObjectId FarmId { get; set; }
+        [BsonId] public ObjectId FarmId { get; set; }
+
         public string FarmName { get; set; }
 
         public string Description { get; set; }

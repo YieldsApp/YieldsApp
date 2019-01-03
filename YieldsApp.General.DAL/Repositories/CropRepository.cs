@@ -1,67 +1,34 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MongoDB.Driver;
+using YieldsApp.DL.Repositories;
 using YieldsApp.DO.General.Models;
 using YieldsApp.General.DL.Context;
 
 namespace YieldsApp.General.DL.Repositories
 {
-    public class CropRepository : ICropRepository
+    public class CropRepository : BaseRepository<Crop, ICropContext>, ICropRepository
     {
-        private readonly ICropContext _context;
-
-        public CropRepository(ICropContext context)
+        public CropRepository(ICropContext context) : base(context)
         {
-            _context = context;
         }
 
-        public async Task<IEnumerable<Crop>> GetAllCrops()
+        public Task<Crop> Get(string name)
         {
-            return await _context
-                .Crops
-                .Find(_ => true)
-                .ToListAsync();
-        }
+            var filter = Builders<Crop>.Filter.Eq(m => m.CropName, name);
 
-        public Task<Crop> GetCrop(string name)
-        {
-            FilterDefinition<Crop> filter = Builders<Crop>.Filter.Eq(m => m.CropName, name);
-
-            return _context
-                .Crops
-                .Find(filter)
-                .FirstOrDefaultAsync();
-        }
-
-        public async Task Create(Crop Crop)
-        {
-            await _context.Crops.InsertOneAsync(Crop);
+            return base.Get(filter);
         }
 
         public async Task<bool> Update(Crop Crop)
         {
-            ReplaceOneResult updateResult =
-                await _context
-                    .Crops
-                    .ReplaceOneAsync(
-                        filter: g => g.CropId == Crop.CropId,
-                        replacement: Crop);
-
-            return updateResult.IsAcknowledged
-                   && updateResult.ModifiedCount > 0;
+            var filter = Builders<Crop>.Filter.Eq(m => m.CropId, Crop.CropId);
+            return await base.Update(Crop, filter);
         }
 
         public async Task<bool> Delete(string name)
         {
-            FilterDefinition<Crop> filter = Builders<Crop>.Filter.Eq(m => m.CropName, name);
-
-            DeleteResult deleteResult = await _context
-                .Crops
-                .DeleteOneAsync(filter);
-
-            return deleteResult.IsAcknowledged
-                   && deleteResult.DeletedCount > 0;
+            var filter = Builders<Crop>.Filter.Eq(m => m.CropName, name);
+            return await base.Delete(filter);
         }
     }
 }

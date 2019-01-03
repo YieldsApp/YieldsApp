@@ -1,8 +1,7 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using YieldsApp.General.DL.Repositories;
 using YieldsApp.Identification.Models;
 
@@ -24,9 +23,13 @@ namespace YieldsApp.Identification.Controllers
         [HttpGet]
         public async Task<List<CropModel>> Get()
         {
-            var crops=  await _cropRepository.GetAllCrops();
-            var cropList=  crops.Select(x => Mapper.Map<CropModel>(x)).ToList();
-            return new List<CropModel>() { new CropModel() { Id = 1, Name = "Crop 1" }, new CropModel() { Id = 2, Name = "Crop 2" }, new CropModel() { Id = 3, Name = "Crop 3" } };
+            var crops = await _cropRepository.GetAll();
+            //var cropList = crops.Select(x => Mapper.Map<CropModel>(x)).ToList();
+            return new List<CropModel>
+            {
+                new CropModel {Id = 1, Name = "Crop 1"}, new CropModel {Id = 2, Name = "Crop 2"},
+                new CropModel {Id = 3, Name = "Crop 3"}
+            };
         }
 
         // GET api/<controller>/5
@@ -38,13 +41,13 @@ namespace YieldsApp.Identification.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody] string value)
         {
         }
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 

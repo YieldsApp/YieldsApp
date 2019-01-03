@@ -1,17 +1,12 @@
-using YieldsApp.Management.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using MongoDB.Bson.Serialization.Conventions;
-using MongoDB.Driver;
-using Newtonsoft.Json.Serialization;
 using YieldsApp.DO;
 using YieldsApp.General.DL.Context;
 using YieldsApp.General.DL.Repositories;
@@ -20,14 +15,15 @@ namespace YieldsApp.Management
 {
     public class Startup
     {
+        public static readonly LoggerFactory MyLoggerFactory
+            = new LoggerFactory(new[] {new ConsoleLoggerProvider((_, __) => true, true)});
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
-        public static readonly LoggerFactory MyLoggerFactory
-            = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -36,7 +32,7 @@ namespace YieldsApp.Management
                 //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            var conventionPack = new ConventionPack { new CamelCaseElementNameConvention() };
+            var conventionPack = new ConventionPack {new CamelCaseElementNameConvention()};
             ConventionRegistry.Register("camelCase", conventionPack, t => true);
 
             services.Configure<Settings>(
@@ -49,19 +45,13 @@ namespace YieldsApp.Management
 
             services.AddScoped<ICropContext, CropContext>();
             services.AddScoped<ICropRepository, CropRepository>();
-            services.AddSingleton<IMongoClient, MongoClient>(
-                _ => new MongoClient(Configuration.GetSection("MongoDb:ConnectionString").Value));
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
             //AutoMapper.Mapper.Initialize(config =>
             //{
             //    config.CreateMap<Crop, CropModel>().ReverseMap();
@@ -84,8 +74,8 @@ namespace YieldsApp.Management
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                    "default",
+                    "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>
@@ -95,10 +85,7 @@ namespace YieldsApp.Management
 
                 spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
+                if (env.IsDevelopment()) spa.UseAngularCliServer("start");
             });
         }
     }

@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
+﻿using Microsoft.Extensions.Options;
+using YieldsApp.DL;
 using YieldsApp.DO;
 using YieldsApp.DO.General.Models;
 
 namespace YieldsApp.General.DL.Context
 {
-    public class CropContext : ICropContext
+    public class CropContext : BaseContext<Crop>, ICropContext
     {
-        private readonly IMongoDatabase _db;
-
-        public CropContext(IOptions<Settings> options, IMongoClient client)
+        public CropContext(IOptions<Settings> options) : base(options, "crops", true)
         {
-            _db = client.GetDatabase(options.Value.GeneralDatabase);
         }
-
-        public IMongoCollection<Crop> Crops => _db.GetCollection<Crop>("crops");
     }
 }
