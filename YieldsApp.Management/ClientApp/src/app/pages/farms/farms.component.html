@@ -1,7 +1,7 @@
 
 
 <app-crud-table [dataManager]="dataManager" (select)="farmChanged()"></app-crud-table>
-<div style="display:flex;" *ngIf="selectedRow">
+<div style="display:flex;" [hidden]="!selectedRow">
   <div style="width: 59%;">
     <h2>Fields</h2>
     <div class="dt-toolbar-row">

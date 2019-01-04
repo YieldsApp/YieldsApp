@@ -38,6 +38,8 @@ export class FarmsComponent implements OnInit {
   settings: CdtSettings = <CdtSettings>{
     crud: true,
     bodyHeight: 150,
+    tableWidth:  600,
+    rowHeight: 40,
     exportAction: true,
     globalFilter: true,
   };
@@ -127,10 +129,12 @@ export class FarmsComponent implements OnInit {
       this.selectedRow = selection[0];
       //debugger;
       this.dtFields.rows = selection[0].fields;
+      this.dtFields.columns[this.actionColumnField].cellTemplate = this.cellTemplate;
     }
     else {
       this.selectedRow = null;
       this.dtFields.rows = [];
+      this.dtFields.columns[this.actionColumnField].cellTemplate = this.cellTemplate;
     }
   }
   createAction() {
