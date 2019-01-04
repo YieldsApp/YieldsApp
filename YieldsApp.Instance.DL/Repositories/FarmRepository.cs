@@ -6,7 +6,7 @@ using YieldsApp.Instance.DL.Context;
 
 namespace YieldsApp.Instance.DL.Repositories
 {
-    public class FarmRepository : BaseRepository<Farm, IFarmContext>
+    public class FarmRepository : BaseRepository<Farm, IFarmContext> , IFarmRepository
     {
         public FarmRepository(IFarmContext context) : base(context)
         {

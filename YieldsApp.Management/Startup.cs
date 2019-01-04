@@ -10,6 +10,8 @@ using MongoDB.Bson.Serialization.Conventions;
 using YieldsApp.DO;
 using YieldsApp.General.DL.Context;
 using YieldsApp.General.DL.Repositories;
+using YieldsApp.Instance.DL.Context;
+using YieldsApp.Instance.DL.Repositories;
 
 namespace YieldsApp.Management
 {
@@ -45,6 +47,8 @@ namespace YieldsApp.Management
 
             services.AddScoped<ICropContext, CropContext>();
             services.AddScoped<ICropRepository, CropRepository>();
+            services.AddScoped<IFarmContext, FarmContext>();
+            services.AddScoped<IFarmRepository, FarmRepository>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
         }

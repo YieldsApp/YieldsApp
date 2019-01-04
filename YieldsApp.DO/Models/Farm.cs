@@ -6,7 +6,9 @@ namespace YieldsApp.DO.Models
 {
     public class Farm : BaseModel
     {
-        [BsonId] public ObjectId FarmId { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string FarmId { get; set; }
 
         public string FarmName { get; set; }
 

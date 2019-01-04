@@ -5,7 +5,7 @@ using YieldsApp.Instance.DL.Context;
 
 namespace YieldsApp.Instance.DL.Repositories
 {
-    public interface IFarmRepository : IBaseRepository<Farm, FarmContext>
+    public interface IFarmRepository : IBaseRepository<Farm, IFarmContext>
     {
         Task<Farm> Get(string name);
         Task<bool> Update(Farm farm);

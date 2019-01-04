@@ -10,7 +10,6 @@ import { FarmService } from './farm.service';
 export class FarmTableService implements DataSource {
 
   primaryKeys: string[] = ['farmId'];
-  lastId: 0;
   private dataFilter: DataFilter;
   private dataSort: DataSort;
 
@@ -31,9 +30,6 @@ export class FarmTableService implements DataSource {
       .then((res)=> res as any)
       .then(function (res) {
         const rows: any[] = res || [];
-
-        if (rows.length > 0)
-          this.lastId = rows[rows.length - 1].farmId;
 
         const filteredData = this.dataFilter.filterRows(rows);
         const sortedData = this.dataSort.sortRows(filteredData);
@@ -74,18 +70,11 @@ export class FarmTableService implements DataSource {
   }
 
   post(item: any): Promise<any> {
-    item.farmId = ++this.lastId;
-    // this.data.items.push(item); // exist in component
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(item), 250);
-    });
+    return this.farmService.post(item);
   }
 
   put(item: any): Promise<any> {
-    // this.data.items[this.findSelectedItemIndex(item)] = item; // exist in component
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(item), 250);
-    });
+    return this.farmService.put(item);
   }
 
   delete(item: any): Promise<any> {

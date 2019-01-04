@@ -17,7 +17,7 @@ import { EditFieldComponent } from './pages/edit-field/edit-field.component';
       { path: 'crop', component: SelectCropComponent },
       { path: 'login', component: LoginComponent },
       { path: 'farms', component: FarmsComponent },
-      { path: 'edit-field/:farmId/:fieldId', component: EditFieldComponent },
+      { path: 'edit-field/:farmId/:fieldName', component: EditFieldComponent },
       { path: 'add-field/:farmId', component: AddFieldComponent },
     ]),
   ],

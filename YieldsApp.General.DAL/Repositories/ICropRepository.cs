@@ -6,7 +6,7 @@ using YieldsApp.General.DL.Context;
 
 namespace YieldsApp.General.DL.Repositories
 {
-    public interface ICropRepository : IBaseRepository<Crop, CropContext>
+    public interface ICropRepository : IBaseRepository<Crop, ICropContext>
     {
         Task<IEnumerable<Crop>> GetAll();
         Task<Crop> Get(string name);

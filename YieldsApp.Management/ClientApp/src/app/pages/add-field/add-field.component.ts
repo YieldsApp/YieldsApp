@@ -12,6 +12,7 @@ export class AddFieldComponent implements OnInit {
 
   title: string;
   field: FieldModel;
+  farm: FarmModel;
   isEditMode: boolean;
   constructor(route: ActivatedRoute, private farmService: FarmService, private router: Router) {
 
@@ -19,6 +20,7 @@ export class AddFieldComponent implements OnInit {
     const farmId = route.snapshot.params['farmId'];
 
     farmService.getItem(farmId).subscribe(farm => {
+      this.farm = farm;
       this.field = new FieldModel();
       this.field.farmId = farmId;
       this.field.farmName = farm.farmName;
@@ -31,8 +33,9 @@ export class AddFieldComponent implements OnInit {
 
 
   onSubmit(field: FieldModel) {
-
-    this.farmService.post(field);
+    this.farm.fields = this.farm.fields ? this.farm.fields : [];
+    this.farm.fields.push(field);
+    this.farmService.put(this.farm);
 
     this.router.navigate(['/farms']);
   }

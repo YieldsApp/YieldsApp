@@ -24,7 +24,7 @@ export class FarmsComponent implements OnInit {
 
   dtFields: DataTable;
   columnsFields: DataTableColumn[];
-  actionColumnField: number=3;
+  actionColumnField: number=2;
   settingsFields: Settings = <Settings>{
     headerRowHeight: 40,
     rowHeight: 40,
@@ -50,7 +50,7 @@ export class FarmsComponent implements OnInit {
     this.columns = [
         {
           title: 'Id',
-        name: 'farmId',
+          name: 'farmId',
           sortable: true,
           filter: true,
           frozen: true,
@@ -84,16 +84,6 @@ export class FarmsComponent implements OnInit {
     
     this.columnsFields = [
       {
-        title: 'Id',
-        name: 'fieldId',
-        sortable: true,
-        filter: true,
-        frozen: true,
-        width: 100,
-        formHidden: true,
-        type: 'number',
-      },
-      {
         title: 'Name',
         name: 'fieldName',
         sortable: true,
@@ -104,8 +94,8 @@ export class FarmsComponent implements OnInit {
         editable: true,
       },
       {
-        title: 'Actions',
-        name: 'fieldId',
+        title: 'Area',
+        name: 'area',
         sortable: true,
         filter: true,
         frozen: true,
@@ -113,7 +103,7 @@ export class FarmsComponent implements OnInit {
         validatorFunc: Validators.get({ required: true }),
         editable: true,
       }, {
-        title: 'Template',
+        title: 'Actions',
         name: 'area',
         sortable: false,
         filter: false,
@@ -149,7 +139,7 @@ export class FarmsComponent implements OnInit {
   editAction(row: FieldModel) {
     const selection = this.dataManager.getSelection();
     if (this.dataManager.rows.length && selection.length !== 0)
-      this.router.navigate(['/edit-field',  selection[0].farmId, row.fieldId]);
+      this.router.navigate(['/edit-field', selection[0].farmId, row.fieldName]);
 
   }
 }

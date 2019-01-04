@@ -5,6 +5,4 @@ export class FieldModel {
   public fieldName: string;
   public coordinates: any[] = [];
   public area: number = 0;
-
-
 }

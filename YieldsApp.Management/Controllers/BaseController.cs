@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using YieldsApp.DL;
 using YieldsApp.DL.Repositories;
 using YieldsApp.DO;
@@ -9,9 +10,12 @@ using YieldsApp.DO;
 
 namespace YieldsApp.Management.Controllers
 {
-    public abstract class BaseController<TEntity, TRepository, TContext> : Controller
+
+    [Route("api/[controller]")]
+    [ApiController]
+    public abstract class BaseController<TEntity, TRepository, TContext> : ControllerBase
         where TEntity : BaseModel
-        where TContext : BaseContext<TEntity>
+        where TContext : IBaseContext<TEntity>
         where TRepository : IBaseRepository<TEntity, TContext>
     {
         protected readonly TRepository _Repository;
@@ -28,5 +32,18 @@ namespace YieldsApp.Management.Controllers
             var list = await _Repository.GetAll();
             return list;
         }
+
+        // POST api/<controller>
+        [HttpPost]
+        public virtual async Task<TEntity> Post([FromBody] TEntity entity)
+        {
+            await _Repository.Create(entity);
+            return entity;
+        }
+
+        // PUT api/<controller>/5
+        [HttpPut]
+        public abstract Task<TEntity> Put([FromBody] TEntity entity);
+
     }
 }
