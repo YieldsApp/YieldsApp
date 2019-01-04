@@ -22,14 +22,52 @@ namespace YieldsApp.Management.Controllers
         [HttpGet]
         public override async Task<IEnumerable<Farm>> Get()
         {
-            var crops = await base.Get();
-            return crops;
+            var list = await base.Get();
+            return list;
         }
+        // GET: api/<controller>
+        [HttpGet("{farmId}")]
+        public  async Task<Farm> Get(string farmId)
+        {
+            var farm = await _Repository.Get(farmId);
+            return farm;
+        }
+
+        //TODO: to update only not embedded values
         [HttpPut]
         public override async Task<Farm> Put([FromBody] Farm entity)
         {
             await _Repository.Update(entity);
             return entity;
+        }
+
+        [HttpDelete]
+        [Route("{farmId}")]
+        public override async Task<bool> Delete(string id)
+        {
+            return await _Repository.Delete(id);
+        }
+
+        [HttpPost]
+        [Route("{farmId}/AddField")]
+        public async Task<Field> AddField(string farmId, [FromBody] Field entity)
+        {
+            await _Repository.AddField(farmId,entity);
+            return entity;
+        }
+        [HttpPost]
+        [Route("{farmId}/UpdateField")]
+        public async Task<Field> UpdateField(string farmId, [FromBody] Field entity)
+        {
+            await _Repository.UpdateField(farmId, entity);
+            return entity;
+        }
+
+        [HttpDelete]
+        [Route("{farmId}/DeleteField/{fieldId}")]
+        public async Task<bool> DeleteField(string farmId, string fieldId)
+        {
+            return await _Repository.DeleteField(farmId, fieldId);
         }
     }
 }

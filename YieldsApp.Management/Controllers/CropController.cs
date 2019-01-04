@@ -31,6 +31,11 @@ namespace YieldsApp.Management.Controllers
             throw new System.NotImplementedException();
         }
 
+        public override Task<bool> Delete(string id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         // GET api/<controller>/5
         [HttpGet("{id}")]
         public string Get(int id)

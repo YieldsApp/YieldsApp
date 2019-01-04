@@ -9,6 +9,7 @@ import { FarmService } from "../../services/farm.service";
 import { Settings, Column as DataTableColumn, DataTable } from '../../components/ng-crud-table/ng-data-table';
 import { FarmTableService } from '../../services/farm-table.service';
 import { FieldModel } from '../../models/FieldModel';
+import { FarmModel } from '../../models/farm-model';
 
 
 @Component({
@@ -24,12 +25,13 @@ export class FarmsComponent implements OnInit {
 
   dtFields: DataTable;
   columnsFields: DataTableColumn[];
-  actionColumnField: number=2;
+  actionColumnField: number = 2;
+  selectedRow: FarmModel;
+
   settingsFields: Settings = <Settings>{
     headerRowHeight: 40,
     rowHeight: 40,
     actionColumnWidth: 0
-
   };
 
 
@@ -111,8 +113,6 @@ export class FarmsComponent implements OnInit {
         width: 200
       }];
     this.dtFields = new DataTable(this.columnsFields, this.settingsFields);
-
-
   }
 
   ngOnInit() {
@@ -122,12 +122,14 @@ export class FarmsComponent implements OnInit {
   }
 
   farmChanged() {
-    const selection = this.dataManager.getSelection();
+    const selection  = this.dataManager.getSelection();
     if (this.dataManager.rows.length > 0 && selection.length !== 0 && selection[0].fields) {
+      this.selectedRow = selection[0];
       //debugger;
       this.dtFields.rows = selection[0].fields;
     }
     else {
+      this.selectedRow = null;
       this.dtFields.rows = [];
     }
   }
@@ -136,10 +138,24 @@ export class FarmsComponent implements OnInit {
     if (this.dataManager.rows.length && selection.length !== 0)
       this.router.navigate(['/add-field', selection[0].farmId]);
   }
-  editAction(row: FieldModel) {
+
+  editFieldAction(row: FieldModel) {
     const selection = this.dataManager.getSelection();
     if (this.dataManager.rows.length && selection.length !== 0)
-      this.router.navigate(['/edit-field', selection[0].farmId, row.fieldName]);
+      this.router.navigate(['/edit-field', selection[0].farmId, row.fieldId]);
+  }
+
+  deleteFieldAction(row: FieldModel) {
+    const selection = this.dataManager.getSelection();
+    if (this.dataManager.rows.length && selection.length !== 0) {
+      this.service.deleteField(selection[0].farmId, row.fieldId).then(result => {
+        if (result) {
+          this.dtFields.deleteRow(row as any);
+        }
+      });
+
+
+    }
 
   }
 }

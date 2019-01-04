@@ -9,16 +9,16 @@ namespace YieldsApp.DL.Repositories
         where TContext : IBaseContext<TEntity>
         where TEntity : BaseModel
     {
-        private readonly TContext _context;
+        protected readonly TContext Context;
 
         public BaseRepository(TContext context)
         {
-            _context = context;
+            Context = context;
         }
 
         public async Task<IEnumerable<TEntity>> GetAll()
         {
-            return await _context
+            return await Context
                 .List
                 .Find(_ => true)
                 .ToListAsync();
@@ -26,7 +26,7 @@ namespace YieldsApp.DL.Repositories
 
         public Task<TEntity> Get(FilterDefinition<TEntity> filter)
         {
-            return _context
+            return Context
                 .List
                 .Find(filter)
                 .FirstOrDefaultAsync();
@@ -34,13 +34,13 @@ namespace YieldsApp.DL.Repositories
 
         public async Task Create(TEntity Entity)
         {
-            await _context.List.InsertOneAsync(Entity);
+            await Context.List.InsertOneAsync(Entity);
         }
 
         public async Task<bool> Update(TEntity Entity, FilterDefinition<TEntity> filter)
         {
             var updateResult =
-                await _context
+                await Context
                     .List
                     .ReplaceOneAsync(
                         filter,
@@ -49,10 +49,21 @@ namespace YieldsApp.DL.Repositories
             return updateResult.IsAcknowledged
                    && updateResult.ModifiedCount > 0;
         }
+        public async Task<bool> Update(FilterDefinition<TEntity> filter, UpdateDefinition<TEntity> update)
+        {
+            var updateResult =
+                await Context
+                    .List
+                    .UpdateOneAsync(
+                        filter,
+                        update);
 
+            return updateResult.IsAcknowledged
+                   && updateResult.ModifiedCount > 0;
+        }
         public async Task<bool> Delete(FilterDefinition<TEntity> filter)
         {
-            var deleteResult = await _context
+            var deleteResult = await Context
                 .List
                 .DeleteOneAsync(filter);
 

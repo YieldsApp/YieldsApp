@@ -78,10 +78,11 @@ export class FarmTableService implements DataSource {
   }
 
   delete(item: any): Promise<any> {
-    // this.data.items.splice(this.findSelectedItemIndex(item), 1); // exist in component
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(item), 250);
-    });
+    return this.farmService.delete(item.farmId);
+  }
+
+  deleteField(farmId: string,fieldId:string): Promise<any> {
+    return this.farmService.deleteField(farmId, fieldId);
   }
 
   getOptions(url: string, parentId: any): Promise<any> {

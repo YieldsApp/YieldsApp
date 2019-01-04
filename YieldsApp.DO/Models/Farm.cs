@@ -16,6 +16,11 @@ namespace YieldsApp.DO.Models
 
         public Location CenterLocation { get; set; }
 
-        public List<Field> Fields { get; set; }
+        private List<Field> _fields;
+        public List<Field> Fields
+        {
+            get => this._fields ?? new List<Field>();
+            set=> this._fields = value ?? new List<Field>();
+        }
     }
 }

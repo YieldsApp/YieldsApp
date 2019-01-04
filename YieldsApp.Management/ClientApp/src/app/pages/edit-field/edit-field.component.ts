@@ -17,16 +17,16 @@ export class EditFieldComponent implements OnInit {
   field: FieldModel;
   isEditMode: boolean;
   farm: FarmModel;
-  fieldName: string;
   constructor(route: ActivatedRoute, private farmService: FarmService, private router: Router) {
 
     this.title = "Edit Field";
     const farmId = route.snapshot.params['farmId'];
-    this.fieldName = route.snapshot.params['fieldName'];
-    debugger;
+    const fieldId = route.snapshot.params['fieldId'];
+
     farmService.getItem(farmId).subscribe(farm => {
       this.farm = farm;
-      this.field = farm.fields.find(field => field.fieldName == this.fieldName);
+      //TODO: to get only one field
+      this.field = farm.fields.find(field => field.fieldId == fieldId);
       this.field.farmId = farmId;
       this.field.farmName = farm.farmName;
       if (!this.field.coordinates) this.field.coordinates = [];
@@ -39,11 +39,7 @@ export class EditFieldComponent implements OnInit {
 
 
   onSubmit(field: FieldModel) {
-    this.farm.fields = this.farm.fields ? this.farm.fields : [];
-    const index  = _.findIndex(this.farm.fields,{ fieldName: this.fieldName });
-    this.farm.fields.splice(index, 1, field);
-    this.farmService.put(this.farm);
-
+    this.farmService.updateField(this.farm.farmId,field);
     this.router.navigate(['/farms']);
   }
 

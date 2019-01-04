@@ -7,8 +7,11 @@ namespace YieldsApp.Instance.DL.Repositories
 {
     public interface IFarmRepository : IBaseRepository<Farm, IFarmContext>
     {
-        Task<Farm> Get(string name);
+        Task<Farm> Get(string farmId);
         Task<bool> Update(Farm farm);
         Task<bool> Delete(string name);
+        Task<bool> AddField(string farmId, Field field);
+        Task<bool> UpdateField(string farmId, Field field);
+        Task<bool> DeleteField(string farmId, string fieldId);
     }
 }

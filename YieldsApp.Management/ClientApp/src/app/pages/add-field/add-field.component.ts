@@ -33,10 +33,7 @@ export class AddFieldComponent implements OnInit {
 
 
   onSubmit(field: FieldModel) {
-    this.farm.fields = this.farm.fields ? this.farm.fields : [];
-    this.farm.fields.push(field);
-    this.farmService.put(this.farm);
-
+    this.farmService.addField(this.farm.farmId,field);
     this.router.navigate(['/farms']);
   }
 

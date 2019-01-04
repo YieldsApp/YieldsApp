@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { filter, map, mergeAll } from 'rxjs/operators';
 
 import _  from 'lodash';
+import { FieldModel } from '../models/FieldModel';
 
 @Injectable({
   providedIn: 'root'
@@ -21,28 +22,37 @@ export class FarmService  {
   }
 
   getItem(farmId: string): Observable<FarmModel> {
-    return this.getList().pipe(map(farms => _.filter(farms, farm => farm.farmId == farmId)), mergeAll()); 
+    const getUrl = `${this.url}/${farmId}`;
+    return this.http.get<FarmModel>(getUrl);
   }
 
- 
-
   post(item: any): Promise<FarmModel> {
-    debugger;
     // this.data.items.push(item); // exist in component
     return this.http.post<FarmModel>(this.url, item).toPromise();
   }
 
   put(item: any): Promise<any> {
-    // this.data.items[this.findSelectedItemIndex(item)] = item; // exist in component
-    let putUrl = `${this.url}/${item.farmId}`;
     return this.http.put<FarmModel>(this.url,  item ).toPromise();
   }
 
-  delete(item: any): Promise<any> {
-    // this.data.items.splice(this.findSelectedItemIndex(item), 1); // exist in component
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(item), 250);
-    });
+  delete(farmId: string): Promise<boolean> {
+    const deleteUrl = `${this.url}/${farmId}`;
+    return this.http.delete<boolean>(deleteUrl).toPromise();
+
+  }
+
+  addField(farmId: string, field: FieldModel): Promise<FarmModel> {
+    const postUrl = `${this.url}/${farmId}/AddField`;
+    return this.http.post<FarmModel>(postUrl, field).toPromise();
+  }
+
+  updateField(farmId: string, field: FieldModel): Promise<FarmModel> {
+    const postUrl = `${this.url}/${farmId}/UpdateField`;
+    return this.http.post<FarmModel>(postUrl, field).toPromise();
+  }
+  deleteField(farmId: string, fieldId: string): Promise<boolean> {
+    const deleteUrl = `${this.url}/${farmId}/DeleteField/${fieldId}`;
+    return this.http.delete<boolean>(deleteUrl).toPromise();
   }
 
   getOptions(url: string, parentId: any): Promise<any> {
@@ -59,5 +69,5 @@ export class FarmService  {
     // .catch(this.handleError);
   }
 
-  
+
 }

@@ -45,5 +45,9 @@ namespace YieldsApp.Management.Controllers
         [HttpPut]
         public abstract Task<TEntity> Put([FromBody] TEntity entity);
 
+        // PUT api/<controller>/5
+        [HttpDelete]
+        public abstract Task<bool> Delete(string id);
+
     }
 }

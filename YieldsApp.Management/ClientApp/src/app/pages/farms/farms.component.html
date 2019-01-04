@@ -1,7 +1,7 @@
 
 
 <app-crud-table [dataManager]="dataManager" (select)="farmChanged()"></app-crud-table>
-<div style="display:flex;">
+<div style="display:flex;" *ngIf="selectedRow">
   <div style="width: 59%;">
     <h2>Fields</h2>
     <div class="dt-toolbar-row">
@@ -15,8 +15,12 @@
     <app-data-table [table]="dtFields"></app-data-table>
     <ng-template #cellTemplate let-row="row" let-value="value">
       <button class="dt-button"
-              (click)="editAction(row)">
+              (click)="editFieldAction(row)">
         Edit
+      </button>
+      <button class="dt-button"
+              (click)="deleteFieldAction(row)">
+        Delete
       </button>
     </ng-template>
   </div>
