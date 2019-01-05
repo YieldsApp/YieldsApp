@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "YieldsApp": {
+    "YieldsApp.Identification": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -56,18 +56,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "YieldsApp:build:serve"
+            "browserTarget": "YieldsApp.Identification:build:serve"
           },
           "configurations": {
             "production": {
-              "browserTarget": "YieldsApp:build:production"
+              "browserTarget": "YieldsApp.Identification:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "YieldsApp:build"
+            "browserTarget": "YieldsApp.Identification:build"
           }
         },
         "test": {
@@ -101,7 +101,7 @@
         }
       }
     },
-    "YieldsApp-e2e": {
+    "YieldsApp.Identification-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -110,7 +110,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "YieldsApp:serve"
+            "devServerTarget": "YieldsApp.Identification:serve"
           }
         },
         "lint": {
@@ -127,7 +127,7 @@
       }
     }
   },
-  "defaultProject": "YieldsApp",
+  "defaultProject": "YieldsApp.Identification",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

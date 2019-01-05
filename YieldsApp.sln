@@ -5,17 +5,17 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YieldsApp.Identification", "YieldsApp\YieldsApp.Identification.csproj", "{A6683734-CAA6-4C28-B5C2-58992DD2D19C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YieldsApp.Management", "YieldsApp.Management\YieldsApp.Management.csproj", "{DA4E3F97-FB83-4060-A9CC-7D9697441210}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YieldsApp.DL", "YieldsApp.DAL\YieldsApp.DL.csproj", "{4902CDF6-E3BF-4787-9E2C-518F24A244E0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YieldsApp.General.DL", "YieldsApp.General.DAL\YieldsApp.General.DL.csproj", "{A7D07574-77D3-4CF0-A86F-FE3D317C26C5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YieldsApp.DO", "YieldsApp.DO\YieldsApp.DO.csproj", "{711C86E9-E8D1-4F11-923C-72E01E2C7AD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YieldsApp.BL", "YieldsApp.BL\YieldsApp.BL.csproj", "{4FFD72BD-4919-4F28-B1D5-F230E4181B0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YieldsApp.BL", "YieldsApp.BL\YieldsApp.BL.csproj", "{4FFD72BD-4919-4F28-B1D5-F230E4181B0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YieldsApp.Instance.DL", "YieldsApp.Instance.DL\YieldsApp.Instance.DL.csproj", "{4E6B31D4-5738-4F54-A31C-CED11C1E607A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YieldsApp.Instance.DL", "YieldsApp.Instance.DL\YieldsApp.Instance.DL.csproj", "{4E6B31D4-5738-4F54-A31C-CED11C1E607A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YieldsApp.Management", "YieldsApp.Management\YieldsApp.Management.csproj", "{5C0735A2-7FA2-40AC-B42B-4B5C87DE36C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +27,6 @@ Global
 		{A6683734-CAA6-4C28-B5C2-58992DD2D19C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6683734-CAA6-4C28-B5C2-58992DD2D19C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6683734-CAA6-4C28-B5C2-58992DD2D19C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA4E3F97-FB83-4060-A9CC-7D9697441210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA4E3F97-FB83-4060-A9CC-7D9697441210}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA4E3F97-FB83-4060-A9CC-7D9697441210}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA4E3F97-FB83-4060-A9CC-7D9697441210}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4902CDF6-E3BF-4787-9E2C-518F24A244E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4902CDF6-E3BF-4787-9E2C-518F24A244E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4902CDF6-E3BF-4787-9E2C-518F24A244E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +47,10 @@ Global
 		{4E6B31D4-5738-4F54-A31C-CED11C1E607A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E6B31D4-5738-4F54-A31C-CED11C1E607A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E6B31D4-5738-4F54-A31C-CED11C1E607A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C0735A2-7FA2-40AC-B42B-4B5C87DE36C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C0735A2-7FA2-40AC-B42B-4B5C87DE36C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C0735A2-7FA2-40AC-B42B-4B5C87DE36C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C0735A2-7FA2-40AC-B42B-4B5C87DE36C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

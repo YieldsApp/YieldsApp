@@ -1,0 +1,107 @@
+[
+  {
+    "farmId":  1, 
+    "farmName": "Farm 1",
+    "description": "List of Apple growers in Connecticut",
+    "centerLocation": {
+      "lat": -25.363,
+      "lng": 131.044
+    },
+    "fields": [
+      {
+        "fieldId": 1,
+        "fieldName": "field 1",
+        "coordinates": [
+          {
+            "lat": -34.309701091040026,
+            "lng": 150.23393529435248
+          },
+          {
+            "lat": -34.309701091040026,
+            "lng": 150.28886693497748
+          },
+          {
+            "lat": -34.36979970380351,
+            "lng": 150.29161351700873
+          }
+        ],
+        "area": 10.5,
+        "sections": [
+          {
+            "sectionName": "A",
+            "area": 4,
+            "cropName": "tomato",
+            "varietyName": "tamar",
+            "plantingDate": "12/10/2018",
+            "gdd": 805,
+            "etc": 3.5
+          },
+          {
+            "sectionName": "B",
+            "area": 6.5,
+            "crop": {
+              "cropName": "tomato",
+              "cropId": "1"
+            },
+            "plantingDate": "12/10/2018",
+            "gdd": 805,
+            "etc": 3.5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "farmId": 2,
+    "farmName": "Farm2",
+    "description": "List of Tomato growers in Connecticut",
+    "centerLocation": {
+      "lat": -25.363,
+      "lng": 131.044
+    },
+    "fields": [
+      {
+        "fieldId": 3,
+        "fieldName": "Farm2 field 1",
+        "coordinates": [
+          {
+            "lat": -34.309701091040026,
+            "lng": 150.23393529435248
+          },
+          {
+            "lat": -34.309701091040026,
+            "lng": 150.28886693497748
+          },
+          {
+            "lat": -34.36979970380351,
+            "lng": 150.29161351700873
+          }
+        ],
+        "area": 10.5,
+        "sections": [
+          {
+            "sectionName": "A",
+            "area": 4,
+            "cropName": "tomato",
+            "varietyName": "tamar",
+            "plantingDate": "12/10/2018",
+            "gdd": 805,
+            "etc": 3.5
+          },
+          {
+            "sectionName": "B",
+            "area": 6.5,
+            "crop": {
+              "cropName": "tomato",
+              "cropId": "1"
+            },
+            "plantingDate": "12/10/2018",
+            "gdd": 805,
+            "etc": 3.5
+          }
+        ]
+      }
+    ]
+  }
+
+]
