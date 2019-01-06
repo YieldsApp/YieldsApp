@@ -20,7 +20,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { SelectCropComponent } from './pages/select-crop/select-crop.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LocationComponent } from './components/location/location.component';
 import { FarmsComponent } from './pages/farms/farms.component';
@@ -28,18 +27,19 @@ import { EditFieldComponent } from './components/edit-field/edit-field.component
 import { AddFieldComponent } from './pages/add-field/add-field.component';
 import { EditFieldComponent as EditFieldPage } from './pages/edit-field/edit-field.component';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { CropComponent } from './pages/system-table/crop/crop.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    SelectCropComponent,
     LoginComponent,
     LocationComponent,
     FarmsComponent,
     EditFieldComponent,
     AddFieldComponent,
     EditFieldPage,
+    CropComponent
   ],
   imports: [
     NgbCollapseModule,

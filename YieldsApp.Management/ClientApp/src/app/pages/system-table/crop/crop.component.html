@@ -1,0 +1,8 @@
+<app-crud-table [dataManager]="dataManager" (select)="cropChanged()"></app-crud-table>
+
+<div style="display:flex;" [hidden]="!selectedRow">
+  <div style="width: 59%;">
+    <h2>Varieties</h2>
+    <app-crud-table [dataManager]="dataManager"></app-crud-table>
+  </div>
+</div>

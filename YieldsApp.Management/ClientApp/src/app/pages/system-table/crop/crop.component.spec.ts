@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectCropComponent } from './select-crop.component';
+import { CropComponent } from './crop.component';
 
-describe('SelectCropComponent', () => {
-  let component: SelectCropComponent;
-  let fixture: ComponentFixture<SelectCropComponent>;
+describe('CropComponent', () => {
+  let component: CropComponent;
+  let fixture: ComponentFixture<CropComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectCropComponent ]
+      declarations: [ CropComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectCropComponent);
+    fixture = TestBed.createComponent(CropComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
