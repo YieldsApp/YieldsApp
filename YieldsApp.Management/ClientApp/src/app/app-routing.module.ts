@@ -20,7 +20,7 @@ import { CropComponent } from './pages/system-table/crop/crop.component';
       { path: 'add-field/:farmId', component: AddFieldComponent },
       {
         path: 'system-table', children: [
-          { path: 'crop', component: CropComponent }
+          { path: 'crops', component: CropComponent }
        ]
       }
     ]),

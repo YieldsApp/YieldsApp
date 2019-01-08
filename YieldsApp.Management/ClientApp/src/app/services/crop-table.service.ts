@@ -3,6 +3,7 @@ import { DataSource, RequestMetadata, PagedResult } from '../components/ng-crud-
 import { DataSort, DataFilter } from '../components/ng-crud-table/ng-data-table/base';
 import { HttpClient } from '@angular/common/http';
 import { CropService } from './crop.service';
+import { VarietyModel } from '../models/variety-model';
 
 @Injectable({
   providedIn: 'root'
@@ -70,19 +71,21 @@ export class CropTableService implements DataSource {
   }
 
   post(item: any): Promise<any> {
+    if (item instanceof VarietyModel)
+      return this.cropService.addVariety(item.cropId,item);
     return this.cropService.post(item);
   }
 
   put(item: any): Promise<any> {
+    if (item instanceof VarietyModel)
+      return this.cropService.updateVariety(item.cropId, item);
     return this.cropService.put(item);
   }
 
   delete(item: any): Promise<any> {
+    if (item instanceof VarietyModel)
+      return this.cropService.deleteVariety(item.cropId, item.varietyId);
     return this.cropService.delete(item.cropId);
-  }
-
-  deleteVariety(cropId: string, varietyId: string): Promise<any> {
-    return this.cropService.deleteVariety(cropId, varietyId);
   }
 
   getOptions(url: string, parentId: any): Promise<any> {

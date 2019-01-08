@@ -21,44 +21,52 @@ namespace YieldsApp.Management.Controllers
         [HttpGet]
         public override async Task<IEnumerable<Crop>> Get()
         {
-            var crops = await base.Get();
-            //var cropList = crops.Select(x => Mapper.Map<CropModel>(x)).ToList();
-            return crops;
+            var list = await base.Get();
+            return list;
         }
-
-        public override Task<Crop> Put( Crop entity)
+        // GET: api/<controller>
+        [HttpGet("{cropId}")]
+        public async Task<Crop> Get(string cropId)
         {
-            throw new System.NotImplementedException();
+            var crop = await _Repository.Get(cropId);
+            return crop;
         }
 
-        public override Task<bool> Delete(string id)
+        //TODO: to update only not embedded values
+        [HttpPut]
+        public override async Task<Crop> Put([FromBody] Crop entity)
         {
-            throw new System.NotImplementedException();
+            await _Repository.Update(entity);
+            return entity;
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpDelete]
+        [Route("{cropId}")]
+        public override async Task<bool> Delete(string id)
         {
-            return "value";
+            return await _Repository.Delete(id);
         }
 
-        // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("{cropId}/AddVariety")]
+        public async Task<Variety> AddVariety(string cropId, [FromBody] Variety entity)
         {
+            await _Repository.AddVariety(cropId, entity);
+            return entity;
+        }
+        [HttpPost]
+        [Route("{cropId}/UpdateVariety")]
+        public async Task<Variety> UpdateVariety(string cropId, [FromBody] Variety entity)
+        {
+            await _Repository.UpdateVariety(cropId, entity);
+            return entity;
         }
 
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpDelete]
+        [Route("{cropId}/DeleteVariety/{varietyId}")]
+        public async Task<bool> DeleteVariety(string cropId, string varietyId)
         {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return await _Repository.DeleteVariety(cropId, varietyId);
         }
     }
 }

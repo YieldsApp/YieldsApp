@@ -13,5 +13,8 @@ namespace YieldsApp.General.DL.Repositories
         Task Create(Crop Crop);
         Task<bool> Update(Crop Crop);
         Task<bool> Delete(string name);
+        Task<bool> AddVariety(string cropId, Variety variety);
+        Task<bool> UpdateVariety(string cropId, Variety variety);
+        Task<bool> DeleteVariety(string cropId, string varietyId);
     }
 }

@@ -18,6 +18,14 @@
         <li class="nav-item" routerLinkActive="active">
           <a (click)="collapseNav()" class="nav-link" [routerLink]="['/farms']">Farms</a>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            System Tables
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item"  [routerLink]="['/system-table/crops']">Crop</a>
+          </div>
+        </li>
         <li class="nav-item" routerLinkActive="active">
           <a (click)="collapseNav()" class="nav-link" [routerLink]="['/about']">About</a>
         </li>

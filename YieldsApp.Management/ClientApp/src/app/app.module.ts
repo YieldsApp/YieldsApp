@@ -28,6 +28,8 @@ import { AddFieldComponent } from './pages/add-field/add-field.component';
 import { EditFieldComponent as EditFieldPage } from './pages/edit-field/edit-field.component';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { CropComponent } from './pages/system-table/crop/crop.component';
+import { CoreModule } from './core/core.module';
+import { DataApiService } from './core/services/data-api.service';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { CropComponent } from './pages/system-table/crop/crop.component';
     AppRoutingModule,
     CrudTableModule,
     DataTableModule,
+    CoreModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC9PnuRk42kbCPMOvsfHpn40r5SoyN38zI',
       libraries: ['places', 'drawing', 'geometry'],
@@ -62,7 +65,7 @@ import { CropComponent } from './pages/system-table/crop/crop.component';
     })
 
   ],
-  providers: [],
+  providers: [DataApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
